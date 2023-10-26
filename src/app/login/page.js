@@ -23,14 +23,14 @@ const page = () => {
           <h3 className="uppercase font-semibold text-xl">Login Page</h3>
           <div className="flex flex-col justify-center items-center w-full h-full gap-8 mt-8">
             <button
-              className="bg-slate-300 w-[75%] py-4 rounded-md font-bold text-xl text-[#1E2f97]"
+              className="bg-slate-300 w-[75%] py-4 rounded-md font-bold text-xl text-[#1E2f97] hover:shadow-md transition-all"
               onClick={() => signIn("github")}
             >
               GitHub Login
             </button>
 
             <button
-              className="bg-slate-300 w-[75%] py-4 rounded-md font-bold text-xl text-[#971e1ead]"
+              className="bg-slate-300 w-[75%] py-4 rounded-md font-bold text-xl text-[#971e1ead] hover:shadow-md transition-all"
               onClick={() => signIn("google")}
             >
               Google Login
