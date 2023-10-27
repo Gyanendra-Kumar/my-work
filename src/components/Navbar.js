@@ -10,9 +10,9 @@ const Navbar = ({ currentUser }) => {
   const { data, status } = useSession();
   const router = useRouter();
 
-  if (status === "authenticated") {
-    router.push("/");
-  }
+  // if (status === "authenticated") {
+  //   router.push("/");
+  // }
   // console.log(currentUser);
   return (
     <header className="w-full bg-slate-200">
@@ -23,7 +23,9 @@ const Navbar = ({ currentUser }) => {
           {currentUser ? (
             <div className="flex gap-4  items-center">
               {currentUser?.name}
+              <Link href="/write">Write</Link>
               <button onClick={() => signOut()}>Sign out</button>
+
               <Image
                 src={currentUser?.image}
                 alt={currentUser?.name}
