@@ -7,16 +7,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 
-const SingleBlogs = ({
-  id,
-  currentUser,
-  name,
-  imageSrc,
-  description,
-  userId,
-}) => {
+const SingleBlogs = ({ data, currentUser }) => {
+  const { id, name, imageSrc, description, userId } = data;
   const router = useRouter();
 
+  // console.log(data);
   //   const onDelete = async () => {
   //     try {
   //       await axios.delete(`/api/blogs/${id}`);
@@ -29,7 +24,6 @@ const SingleBlogs = ({
   const onDelete = async (id) => {
     try {
       await axios.delete(`/api/blogs/${id}`);
-      router.refresh();
       router.push("/");
     } catch (error) {
       throw new Error(error);
@@ -54,6 +48,7 @@ const SingleBlogs = ({
               <p>{description}</p>
             </div>
           </div>
+          <h4 className="mt-2">Created By: {data?.user?.name}</h4>
         </div>
       </Link>
 

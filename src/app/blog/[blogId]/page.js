@@ -22,18 +22,20 @@ const page = async ({ params }) => {
   const { id, name, imageSrc, description } = blog;
 
   return (
-    <div className="w-[1100px] border-2 p-4">
-      <div className="flex gap-2 justify-evenly items-center">
-        <div>
-          <Image src={imageSrc} alt={name} width={500} height={500} />
+    <div className="flex justify-center items-center h-[80vh]">
+      <div className="w-[900px] border-2 p-4 px-10 ">
+        <div className="flex gap-2 justify-between items-center ">
+          <div>
+            <Image src={imageSrc} alt={name} width={500} height={500} />
+          </div>
+          <div className="flex flex-col gap-4 leading-[1.5]">
+            <h1 className="font-bold text-3xl">{name}</h1>
+            <p>{description}</p>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 leading-[1.5]">
-          <h1 className="font-bold text-3xl">{name}</h1>
-          <p>{description}</p>
-        </div>
+        <p className="mt-2">Created By: {blog?.user?.name}</p>
+        {blog?.user?.id === currentUser?.id ? <GetIcons blog={blog} /> : ""}
       </div>
-      <p>Created By: {blog?.user?.name}</p>
-      {blog?.user?.id === currentUser?.id ? <GetIcons id={id} /> : ""}
     </div>
   );
 };

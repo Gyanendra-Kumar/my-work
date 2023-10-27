@@ -1,7 +1,5 @@
 import SingleBlogs from "@/components/SingleBlogs";
-import getBlogs from "@/utils/getBlogs";
 import getCurrentUser from "@/utils/getCurrentUser";
-import axios from "axios";
 
 const getData = async () => {
   const res = await fetch("http://localhost:3000/api/blogs");
@@ -27,7 +25,7 @@ export default async function Home() {
       <div className="flex min-h-screen flex-col items-center justify-between p-24 gap-4">
         {blogs.map((item) => (
           <div key={item.id}>
-            <SingleBlogs {...item} currentUser={currentUser} />
+            <SingleBlogs data={item} currentUser={currentUser} />
           </div>
         ))}
       </div>

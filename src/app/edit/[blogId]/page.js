@@ -15,7 +15,7 @@ const page = async ({ params }) => {
     throw new Error("No blog found");
   }
   // console.log(blogId);
-  console.log(blog);
+  //   console.log(blog);
 
   return (
     <div>
