@@ -6,7 +6,6 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
- 
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,4 +18,38 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+}
+
+.loader-line {
+  width: 200px;
+  height: 3px;
+  position: relative;
+  overflow: hidden;
+  background-color: #ddd;
+  margin: 100px auto;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+.loader-line:before {
+  content: "";
+  position: absolute;
+  left: -50%;
+  height: 3px;
+  width: 40%;
+  background-color: coral;
+  -webkit-animation: lineAnim 1s linear infinite;
+  -moz-animation: lineAnim 1s linear infinite;
+  animation: lineAnim 1s linear infinite;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+@keyframes lineAnim {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 100%;
+  }
 }

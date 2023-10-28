@@ -1,6 +1,7 @@
 import EditForm from "@/components/EditForm";
 import getBlogById from "@/utils/getBlogsById";
 import getCurrentUser from "@/utils/getCurrentUser";
+import { redirect } from "next/navigation";
 
 const page = async ({ params }) => {
   const { blogId } = params;
@@ -9,7 +10,7 @@ const page = async ({ params }) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return null;
+    return redirect("/");
   }
 
   const { name, imageSrc, description } = blog;
