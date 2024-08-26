@@ -1,97 +1,39 @@
-"use client";
+import React from 'react';
+import Header from '../../src/components/header_v2';
+import { HeaderProvider } from '../../src/components/header_v2/components/context';
+import InMemoryCache from '../../src/utils/InMemoryCache';
+import InMemoryCacheContext from '../../src/utils/InMemoryCacheContext';
+import './sox-styles.scss'
+import RoleAccessGuard from '../../src/components/role-access-guard/role-access-guard';
+import SoxAlertsManipulation from './components/SoxAlertsManipulation';
 
-import ImageUpload from "@/components/ImageUpload";
-import Input from "@/components/Input";
-import axios from "axios";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
-const initialState = {
-  name: "",
-  imageSrc: "",
-  description: "",
-};
-
-const page = () => {
-  const [state, setState] = useState(initialState);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { status } = useSession();
-  const router = useRouter();
-
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (status === "unauthenticated") {
-    return router.push("/");
-  }
-
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const customValue = (id, value) => {
-    setState((prevValues) => ({
-      ...prevValues,
-      [id]: value,
-    }));
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios.post("/api/blogs", state);
-      router.refresh();
-      router.push("/");
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
-
+const SoxAlertsView = () => {
   return (
-    <form className="w-[600px] h-[700px] mx-auto py-8" onSubmit={onSubmit}>
-      <div>
-        <ImageUpload
-          value={state.imageSrc}
-          onChange={(value) => customValue("imageSrc", value)}
-        />
-      </div>
-
-      <div className="flex flex-col justify-center h-[450px] w-[350px] mx-auto gap-2">
-        <div>
-          <Input
-            name="name"
-            id="name"
-            placeholder="Blog Header"
-            type="text"
-            value={state.name}
-            onChange={handleChange}
-          />
-          <Input
-            name="description"
-            id="description"
-            placeholder="Blog Description"
-            type="text"
-            value={state.description}
-            onChange={handleChange}
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="bg-slate-200 py-4"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+    <InMemoryCacheContext.Provider value={InMemoryCache}>
+      <HeaderProvider>
+        <Header />
+        <RoleAccessGuard showError={true} collectionId="vcg-security-metrics-access">
+          <SoxAlertsManipulation />
+        </RoleAccessGuard>
+      </HeaderProvider>
+    </InMemoryCacheContext.Provider>
   );
 };
 
-export default page;
+export default SoxAlertsView;
+
+.sox-alert-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+import React from 'react';
+import '../sox-styles.scss';
+
+const SoxAlertsManipulation = () => {
+  return <div className="sox-alert-container">SoxAlertsManipulation</div>;
+};
+
+export default SoxAlertsManipulation;
